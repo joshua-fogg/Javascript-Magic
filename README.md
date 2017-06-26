@@ -1,0 +1,2 @@
+# Javascript-Magic
+Exploring Javascript
