@@ -1,0 +1,19 @@
+#page{
+  width:auto;
+  height:auto;
+  background-color:grey;
+}
+
+#cancan {
+  border: 1px black solid;
+  Width: 75%;
+  Height: auto;
+  margin: 7.5% 15%;
+  background-color:white;
+  Opacity:0.5;
+  overflow:hidden;
+}
+
+#buttons{
+
+}
