@@ -1,4 +1,6 @@
-// generate random shape, size and colour @ random spot.
+document.addEventListener("DOMContentLoaded", function(event) {
+    console.log("DOM fully loaded and parsed");
+  });
 
 //define structural components ie canvas and 2d location setting.
 var c = document.getElementById('cancan');
@@ -8,21 +10,12 @@ var height = c.height;
 var vars = {};
 console.log('loaded start variables');
 
- var radius = Math.random()*width/2;
- var startCoordX = Math.random()*width;
- var startCoordY = Math.random()*height;
- var midCoordX = Math.random()*width;
- var midCoordY = Math.random()*height;
-
-/*function ranLoc(ex){
-
-  vars.Xval = Math.random()*width;
-  vars.Yval = Math.random()*height;
-  vars.radius = Math.random()*width/3;
-};*/
-
-
-  //defining visual style of canvas as 2D
+ var radius = function(){return Math.floor(Math.random()*width/2);};
+ var startCoordX = function(){ return Math.floor(Math.random()*width);};
+ var startCoordY = function(){return Math.floor(Math.random()*height);};
+ var midCoordX = function(){return Math.floor(Math.random()*width);};
+ var midCoordY = function(){return Math.floor(Math.random()*height);};
+console.log('initial co-ordinates loaded');
 
 // random colour generator
 function ranColour(){ //makes random hexadecimal colour
@@ -35,12 +28,11 @@ function ranColour(){ //makes random hexadecimal colour
 }
 
 //Draw Shape : circle, square, triangle
-  //Needs automated trigger -> event listener?
-  // Need dom loader.
-   /var shapetype = prompt('Choose Shape');/
-
-switch (shapetype){
-  case 'circle':
+  //automated trigger -> event listener?
+  //var shapetype = prompt('Choose Shape');/
+function draw(){
+e = Math.floor(Math.random()*3);
+  if(e<=2){//circle'
    cx.beginPath();
    cx.arc(startCoordX, startCoordY, radius, 0, 2 * Math.PI, false);
    cx.fillStyle = ranColour();
@@ -48,30 +40,29 @@ switch (shapetype){
    cx.lineWidth = 1;
    cx.strokeStyle = ranColour();
    cx.stroke();
-    break;
-
-  case 'square':
+    }
+ else if(e>2&&e<=4){//square'
     cx.rect(startCoordX,startCoordY,ranWidth,ranHeight);
     cx.stroke();
-    break;
-
-  case 'triangle':
+ }
+  else if (e>4){ // triangle
   cx.beginPath();
-  cx.moveTo(startCoordX, startCoordY);
-  cx.lineTo(midCoordX, midCoordY);
-  cx.lineTo(90, 70);
-  cx.fill();
+  cx.moveTo(startCoordX(), startCoordY() );
+  cx.lineTo(midCoordX(), midCoordY() );
+  cx.lineTo(startCoordX(), startCoordY() );
+  //
+   cx.fillStyle = ranColour();
+   cx.fill();
+   cx.lineWidth = 1;
+   cx.strokeStyle = ranColour();
+   cx.stroke();
+    // cx.fillStyle = ranColour();
+  // cx.fill();
+  }
+  else {console.log('number error');}
  }
 
-
-
-
-var locObj = function(){
-
-};
-
-
-//draw circle
+setInterval(draw(),500);
 
 
   //could do draw in mouse area. Click to change shape or colour??
