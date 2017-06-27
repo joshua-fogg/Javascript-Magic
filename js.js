@@ -1,73 +1,70 @@
-document.addEventListener("DOMContentLoaded", function(event) {
+//document.addEventListener("DOMContentLoaded", function(event) {
   console.log("DOM fully loaded and parsed");
 });
 
 //define structural components ie canvas and 2d location setting.
-var c = document.getElementById("cancan");
-var cx = c.getContext("2d");
-var width = c.width;
-var height = c.height;
+var cc = document.getElementById("cancan");
+var ccx = c.getContext("2d");
+var width = cc.width;
+var height = cc.height;
 var vars = {};
 console.log("loaded start variables");
 
 var radius = function() {
-  return Math.floor(Math.random() * width / 2);
-};
+  return Math.floor(Math.random() * width / 2); };
 var startCoordX = function() {
-  return Math.floor(Math.random() * width);
-};
+  return Math.floor(Math.random() * width); };
 var startCoordY = function() {
-  return Math.floor(Math.random() * height);
-};
+  return Math.floor(Math.random() * height); };
 var midCoordX = function() {
-  return Math.floor(Math.random() * width);
-};
+  return Math.floor(Math.random() * width); };
 var midCoordY = function() {
-  return Math.floor(Math.random() * height);
-};
+  return Math.floor(Math.random() * height); };
+
 console.log("initial co-ordinates loaded");
 
 // random colour generator
 function ranColour() {
   //makes random hexadecimal colour
-  var clr = "#";
-  while (clr.length < 7) {
-    clr += Math.random().toString(16).substr(-6).substr(-1);
-    console.log("created random colour" + clr);
-  }
+  var clr = "#";// starts Hexicode
+  while (clr.length < 7) {//sets Hexilength
+    clr += Math.random().toString(16).substr(-6).substr(-1); //isolates hexistring size form within random code and sets to clr var
+   }
+  console.log("created random colour" + clr);
   return clr;
 }
 
 //Draw Shape : circle, square, triangle
 //automated trigger -> event listener?
 //var shapetype = prompt('Choose Shape');/
-function draw() {
-  e = Math.floor(Math.random() * 3);
+function drawCan() {
+  var e = Math.floor(Math.random() * 6);
+  var colouring = ranColour();
   if (e <= 2) {
     //circle'
-    cx.beginPath();
-    cx.arc(startCoordX, startCoordY, radius, 0, 2 * Math.PI, false);
-    cx.fillStyle = ranColour();
-    cx.fill();
-    cx.lineWidth = 1;
-    cx.strokeStyle = ranColour();
-    cx.stroke();
+    ccx.beginPath();
+    ccx.arc(startCoordX, startCoordY, radius, 0, 2 * Math.PI, false);
+    ccx.fillStyle = ranColour();
+    ccx.fill();
+    ccx.lineWidth = '1';
+    ccx.strokeStyle = ranColour();
+    ccx.stroke();
   } else if (e > 2 && e <= 4) {
     //square'
-    cx.rect(startCoordX, startCoordY, ranWidth, ranHeight);
-    cx.stroke();
+    ccx.rect(startCoordX, startCoordY, ranWidth/4, ranHeight/4);
+    ccx.stroke();
   } else if (e > 4) {
     // triangle
-    cx.beginPath();
-    cx.moveTo(startCoordX(), startCoordY());
-    cx.lineTo(midCoordX(), midCoordY());
-    cx.lineTo(startCoordX(), startCoordY());
-    //
-    cx.fillStyle = ranColour();
-    cx.fill();
-    cx.lineWidth = 1;
-    cx.strokeStyle = ranColour();
-    cx.stroke();
+    ccx.beginPath();
+    ccx.moveTo(startCoordX(), startCoordY());
+    ccx.lineTo(midCoordX(), midCoordY());
+    ccx.lineTo(startCoordX(), startCoordY());
+    //decide between bellow and bellow commented.
+    ccx.fillStyle = ranColour();
+    ccx.fill();
+    ccx.lineWidth = '1';
+    ccx.strokeStyle = ranColour();
+    ccx.stroke();
     // cx.fillStyle = ranColour();
     // cx.fill();
   } else {
@@ -75,6 +72,6 @@ function draw() {
   }
 }
 
-setInterval(draw(), 500);
+setInterval(drawCan(), 500);
 
 //could do draw in mouse area. Click to change shape or colour??
