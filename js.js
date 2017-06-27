@@ -1,26 +1,20 @@
-//document.addEventListener("DOMContentLoaded", function(event) {
-  console.log("DOM fully loaded and parsed");
+document.addEventListener("DOMContentLoaded", function(event) {
+  console.log("DOM fully loaded and parsed");// content loaded
 });
 
 //define structural components ie canvas and 2d location setting.
 var cc = document.getElementById("cancan");
-var ccx = c.getContext("2d");
+var ccx = cc.getContext("2d");
 var width = cc.width;
 var height = cc.height;
-var vars = {};
 console.log("loaded start variables");
-
+//shape parameter functions
 var radius = function() {
-  return Math.floor(Math.random() * width / 2); };
-var startCoordX = function() {
+  return Math.floor(Math.random() * 100); };
+var CoordX = function() {
   return Math.floor(Math.random() * width); };
-var startCoordY = function() {
+var CoordY = function() {
   return Math.floor(Math.random() * height); };
-var midCoordX = function() {
-  return Math.floor(Math.random() * width); };
-var midCoordY = function() {
-  return Math.floor(Math.random() * height); };
-
 console.log("initial co-ordinates loaded");
 
 // random colour generator
@@ -34,44 +28,47 @@ function ranColour() {
   return clr;
 }
 
-//Draw Shape : circle, square, triangle
-//automated trigger -> event listener?
-//var shapetype = prompt('Choose Shape');/
+//generate selector, 'e'
+//select draw shape : circle, square, triangle
+// if other value added, return error value.
 function drawCan() {
-  var e = Math.floor(Math.random() * 6);
+  var e = Math.round(Math.random() * 7);
+  console.log(e)
   var colouring = ranColour();
-  if (e <= 2) {
-    //circle'
+  if (e <= 3) {
+    //circle
     ccx.beginPath();
-    ccx.arc(startCoordX, startCoordY, radius, 0, 2 * Math.PI, false);
+    ccx.arc(CoordX, CoordY, radius, 0, 2 * Math.PI, false);
     ccx.fillStyle = ranColour();
     ccx.fill();
     ccx.lineWidth = '1';
     ccx.strokeStyle = ranColour();
     ccx.stroke();
-  } else if (e > 2 && e <= 4) {
-    //square'
-    ccx.rect(startCoordX, startCoordY, ranWidth/4, ranHeight/4);
+  } else if (e > 3 && e <= 5) {//square
+    //square draw
+    ccx.rect(CoordX(), CoordY(), CoordX(), CoordY());
     ccx.stroke();
-  } else if (e > 4) {
-    // triangle
+    //square filler
+    ccx.fillstyle = ranColour();
+    ccx.fill();
+  } else if (e > 5) {//triangle
+    // triangle draw
     ccx.beginPath();
-    ccx.moveTo(startCoordX(), startCoordY());
-    ccx.lineTo(midCoordX(), midCoordY());
-    ccx.lineTo(startCoordX(), startCoordY());
-    //decide between bellow and bellow commented.
+    ccx.moveTo(CoordX(), CoordY());
+    ccx.lineTo(CoordX(), CoordY());
+    ccx.lineTo(CoordX(), CoordY());
+    // fill and colour script
     ccx.fillStyle = ranColour();
     ccx.fill();
     ccx.lineWidth = '1';
     ccx.strokeStyle = ranColour();
     ccx.stroke();
-    // cx.fillStyle = ranColour();
-    // cx.fill();
   } else {
+    //return error
     console.log("number error");
   }
 }
-
-setInterval(drawCan(), 500);
+setInterval(drawCan, 500);
 
 //could do draw in mouse area. Click to change shape or colour??
+//found bug, coord functions were called as value rather than getting a new variable each time.
