@@ -1,6 +1,5 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-  console.log("DOM fully loaded and parsed");// content loaded
-});
+window.addEventListener("load", function(event) {
+    console.log("All resources finished loading!");
 
 //define structural components ie canvas and 2d location setting.
 var cc = document.getElementById("cancan");
